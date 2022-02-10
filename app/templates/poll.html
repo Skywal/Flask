@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>poll page</h1>
+
+{{poll_object}}
+<ul>
+{% for index in poll_object.keys() %}
+    <li>
+        <p>{{ poll_object[index]['question'] }}</p>
+        <div>
+            {% for answer in poll_object[index]['answers'] %}
+                {% if answer != 'nan' %}
+                <div>
+                    <input type="radio" id="{{ answer }}_id" value="{{ answer }}">
+                    <label for="{{ answer }}_id">{{ answer }}</label>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

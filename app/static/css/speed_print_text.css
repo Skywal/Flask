@@ -1,0 +1,12 @@
+.textContainer {
+    /* https://stackoverflow.com/questions/5078239/how-do-i-remove-the-space-between-inline-inline-block-elements */
+    /* font-size: 0; */
+}
+
+#printedCorrectText {
+    background: grey;
+    font-size: 16px;
+}
+#referenceTextToPrint{
+    font-size: 16px;
+}

@@ -1,4 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Index page</h1>
+<div class="main-content">
+    <h1>Index page</h1>
+
+    <ul>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('get_database_content') }}">DB tables</a></li>
+    </ul>
+    <a href="{{ url_for('speed_print_text') }}">speed print test</a>
+    <ul>
+        <li><a href="{{ url_for('display_general_conversion') }}">Conversion page</a></li>
+    </ul>
+</div>
 {% endblock %}

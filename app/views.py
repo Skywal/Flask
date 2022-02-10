@@ -1,33 +1,77 @@
-from app import app
-from flask import render_template, request, redirect, url_for, flash, make_response, session
+import json
+
+from app import app, sql_general_dao
+from flask import render_template, request
 
 
 @app.route('/')
 def index():
-    #return render_template('index.html', name='Jerry')
+
     return render_template('index.html')
 
 
-@app.route('/admin/')
-#@login_required # pip install flask-login 
-def admin():
-     return render_template('admin.html')
+@app.route('/login/', methods=['get','post'])
+def login():
+    # message = ''
+    username: str = None
+    password: str = None
 
-@app.route('/hello')
-def hello():
-    return 'Hello, World'
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-@app.route('/user/<username>')
-def show_user_profile(username):
-    # show the user profile for that user
-    return f'User {escape(username)}'
+    if username and password:
+        return f"Sucessfull login <u>{username}</u> and your password is <u>{password}</u>"
+    else:
+        return render_template('login_page.html')
 
-@app.route('/post/<int:post_id>')
-def show_post(post_id):
-    # show the post with the given id, the id is an integer
-    return f'Post {post_id}'
 
-@app.route('/path/<path:subpath>')
-def show_subpath(subpath):
-    # show the subpath after /path/
-    return f'Subpath {escape(subpath)}'
+@app.route('/get-database-content/')
+def get_database_content():
+    return render_template('get_database_content.html', all_table_names=sql_general_dao.get_all_table_names())
+
+
+@app.route('/table-content/<table_name>/')
+def table_content(table_name):
+    column_names = sql_general_dao.get_table_column_name(table_name)
+    table_content = sql_general_dao.get_table_content(table_name)
+    table_content = [item.values() for item in table_content]
+
+    return render_template("table_content.html", table_content=table_content, column_names=column_names)
+
+
+@app.route('/general-conversion/')
+def display_general_conversion():
+    all_questionnaire_general_info = sql_general_dao.get_all_questionnaire_general_info()
+    for i in range(len(all_questionnaire_general_info)):
+
+        all_questionnaire_general_info[i]['poll_creation_time'] = all_questionnaire_general_info[i]['poll_creation_time'].isoformat()
+    # all_questionnaire_general_info = json.dumps(all_questionnaire_general_info)
+    # print(all_questionnaire_general_info)
+    return render_template('conversion/general_conversion.html', data=all_questionnaire_general_info)
+
+
+@app.route('/general-conversion/conversion/<string:table_name>')
+def concrete_conversion(table_name: str):
+    from app.conversion import make_conversion_page_content
+
+    table_content = make_conversion_page_content(table_name)
+    # print(table_content)
+    # print(table_name)
+    column_names = table_content[-1].keys()
+
+    return render_template('conversion/conversion.html', column_names=column_names, table_content=table_content)
+
+
+@app.route('/bot-statistics/')
+def bot_statistics():
+    return None
+
+
+@app.route('/speed-print-text/')
+def speed_print_text():
+    data = None
+    with open("text_to_print.txt") as f:
+        data = f.read()
+
+    return render_template('speed-print/speed-print-text.html', data=data)

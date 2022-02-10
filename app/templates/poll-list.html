@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+<style>
+th {
+    border: 2px solid black;
+}
+
+</style>
+{% block content %}
+    <h1>Polls page</h1>
+    <ul>
+        {% for item in awailable_polls%}
+            <li><a href="{{url_for('poll', poll_id=item, poll_name=item)}}">{{item}}</a></li>
+        {% endfor %}
+    </ul>
+
+    <table style="border: 2px solid black">
+    <tr>
+    <th style="border: 2px solid black">Company</th>
+    <th style="border: 2px solid black">Contact</th>
+    <th style="border: 2px solid black">Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+    </table>
+{% endblock %}

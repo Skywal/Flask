@@ -1,9 +1,5 @@
-import os
 from app import app
-from flask_script import Manager, Shell
-#from flask_migrate import MigrateCommand
+from config import is_debug
 
-manager = Manager(app)
-
-if __name__ == '__main__':
-    manager.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080, debug=is_debug)

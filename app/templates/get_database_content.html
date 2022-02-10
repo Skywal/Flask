@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="main-content">
+    <ul id="navigation">
+    {% for item in all_table_names %}
+        <li><a href="{{ url_for('table_content', table_name=item) }}">{{item}}<a></li>
+    {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

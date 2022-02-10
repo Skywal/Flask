@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/speed_print_text.css') }}">
+
+<div class="main-content">
+    <h1>Speed print test</h1>
+    <p>Test your print skills with this small app</p>
+</div>
+
+<div class="main-content">
+    <div class="textContainer">
+        <span id="printedCorrectText"></span><span id="referenceTextToPrint">{{ data }}</span>
+    </div>
+</div>
+
+<div class="main-content my-2">
+    <div class="row g-4 py-5 row-cols-lg-3">
+        <div class="feature col">
+            <h4>Timer</h4>
+            <p id="timer"></p>
+        </div>
+        <div class="feature col">
+            <button onclick="start()">Start</button>
+        </div>
+    </div>
+    <h4>JavaScript output</h4>
+    <p id="javascriptOutput"></p>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/speed_print_text.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="main-content">
+
+    <table style="border: 1px solid black; border-collapse: collapse;">
+        <tr>
+            {% for name in column_names %}
+                <th style="border: 1px solid black; border-collapse: collapse;">{{ name }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in table_content %}
+        <tr>
+            {% for item in row %}
+                <td style="border: 1px solid black; border-collapse: collapse;">{{item}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<a href="{{ url_for('get_database_content') }}"> << Back </a>
+
+{% endblock %}

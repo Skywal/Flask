@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+<!--{{ table_content }}-->
+    <table style="border: 1px solid black; border-collapse: collapse;">
+        <tr>
+            {% for name in column_names %}
+                <th style="border: 1px solid black; border-collapse: collapse;">{{ name }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in table_content %}
+        <tr>
+            {% for key in column_names %}
+
+                <td style="border: 1px solid black; border-collapse: collapse;">{{ row[key] }}</td>
+
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

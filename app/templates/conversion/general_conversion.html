@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+
+</script>
+<div class="main-content">
+    <h1>Conversion page</h1>
+
+<!--    <ul>-->
+<!--        <li><a href="{{ url_for('concrete_conversion', table_name='1642499019_2113535774_statistic') }}">Concrete 1642499019_2113535774_statistic conversion</a></li>-->
+<!--        <li><a href="{{ url_for('concrete_conversion', table_name='1624818960_395372589_statistic') }}">Concrete 1624818960_395372589_statistic conversion</a></li>-->
+<!--    </ul>-->
+
+    <ul>
+        {% for line in data %}
+            <li><a href="{{ url_for('concrete_conversion', table_name=line.poll_table_name+'_statistic') }}">{{ line.poll_title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        <li><a href="{{ url_for('index') }}"> << Back </a></li>
+    </ul>
+
+</div>
+
+{% endblock %}
